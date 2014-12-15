@@ -17,6 +17,8 @@
             <body>
                 
                 <div class="panel panel-primary">
+                
+                	<c:GF_Header pgId="5" infoName="{!Geo_Location__c.Name}" />
 
                     <div class="panel-body">
                             <div class="bs-example">
@@ -31,7 +33,7 @@
                                             </div>
                                              
                                             
-                                          <apex:outputPanel styleClass="form-group">
+                                          <apex:outputPanel styleClass="form-group" rendered="{!postEditable}">
                                                <div class="form-group">
                                                    <h3>
                                                        <apex:outputLabel value="{!Geo_Location__c.Title__c}" html-placeholder="Post Title" rendered="{!Geo_Location__c.Title__c !=null}"/>
@@ -42,7 +44,21 @@
                                                </div>
                                           </apex:outputPanel>
                                           
-
+                                          <apex:outputPanel styleClass="form-group" rendered="{!!postEditable}">
+                                               <div class="form-group">
+                                                   <h6>
+                                                       <apex:inputText styleClass="form-control" value="{!Geo_Location__c.Title__c}" id="PostTitleID"  html-placeholder="Post Title"/>
+                                                   </h6>
+                                               </div>
+                                               <div class="form-group">
+                                                   <apex:inputTextarea styleClass="form-control" value="{!Geo_Location__c.Description__c}" id="PostDescriptionID" rows="3" html-placeholder="Post Description"/>
+                                               </div>
+                                          </apex:outputPanel>
+                                          
+                                          <div class="btn-group btn-group-justified ng-cloak" style="text-align: center;">                         
+                                              <apex:commandButton value="Edit" action="{!Edit}" style="width:auto;" styleClass="btn btn-primary" rendered="{!postEditable}" onClick="showBlocker();"/>
+                                          </div>
+                                          
                                           <apex:pagemessages />
 
                                     </form>

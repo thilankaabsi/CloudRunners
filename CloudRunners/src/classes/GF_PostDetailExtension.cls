@@ -11,7 +11,11 @@ public with sharing class GF_PostDetailExtension {
     public string postTitle{get;set;}
     public string postDescription{get;set;}
     public string postImage{get;set;}
+    public boolean postEditable {get;set;}
     
+    /**
+     * Constructor
+     */
     public GF_PostDetailExtension(ApexPages.StandardController controller) {
     	
         try{
@@ -19,6 +23,7 @@ public with sharing class GF_PostDetailExtension {
             this.glc = (Geo_Location__c)controller.getRecord();
             this.postTitle = this.glc.Title__c;
             this.postDescription = this.glc.Description__c;
+            this.postEditable = true;
             
             loadAttachment();
             			
@@ -28,10 +33,25 @@ public with sharing class GF_PostDetailExtension {
             ApexPages.addMessage(errMsg);
         }
     }
-    	
+    
+    /**
+	* Load attachments related ot the selected post
+	*/
    	public void loadAttachment() {
     
+        try{      
 
+           this.postAttachment = [ SELECT Id FROM Attachment WHERE ParentId =: this.glc.Id LIMIT 1 ];
+
+            if(!this.postAttachment.isEmpty()) {
+
+                this.postImage = '/servlet/servlet.FileDownload?file=' + this.postAttachment[0].Id;                  
+            }
+            			
+        } Catch(Exception ex){
+            ApexPages.Message errMsg = new ApexPages.Message(ApexPages.severity.INFO, ex.getMessage());  
+            ApexPages.addMessage(errMsg);
+        }
     }
 
 }

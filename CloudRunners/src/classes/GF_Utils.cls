@@ -9,6 +9,19 @@ public with sharing class GF_Utils {
 		
 	} 
 	
+	public static void updateSObj(SObject sObj) {
+		// Create's a Savepoint since data should not be committed to the database
+        Savepoint sp = Database.setSavepoint();    
+        try {        
+            update sObj;
+        } catch (Exception ex) {
+            System.debug('Error in update. Exception : ' + ex);
+            ApexPages.addMessages(ex);            
+            // Revert's the database to the original state
+            Database.rollback(sp);
+        }
+	}
+	
 	/**
 	* load the user
 	*/

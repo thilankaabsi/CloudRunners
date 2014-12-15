@@ -14,16 +14,7 @@ public class GF_UserProfileController {
      * Update User.
      */
     public PageReference updateUser() {
-        // Create's a Savepoint since data should not be committed to the database
-        Savepoint sp = Database.setSavepoint();    
-        try {        
-            update this.user;
-        } catch (Exception ex) {
-            System.debug('Error in updateUser() failed. Exception : ' + ex);
-            ApexPages.addMessages(ex);            
-            // Revert's the database to the original state
-            Database.rollback(sp);
-        } 
+        GF_Utils.updateSObj(this.user); 
         return null;
     }	
 }

@@ -95,6 +95,8 @@
             
             <div class="panel panel-primary">
             
+            	<c:GF_Header pgId="2" />
+            
                  <div class="panel-body">
                     <div class="bs-example">
                         <div class="well">
