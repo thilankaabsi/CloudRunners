@@ -5,10 +5,57 @@
  * @since           : 15 Dec 2014
  ************************************************************* 
  -->
-<apex:page id="geoPostDetailPg" standardController="Geo_Location__c"  doctype="html-5.0" standardStylesheets="false" showHeader="false" sideBar="false" applyHtmlTag="false">
+<apex:page cache="true" standardController="Geo_Location__c" extensions="GF_PostDetailExtension" doctype="html-5.0" standardStylesheets="false" showHeader="false" sideBar="false" applyHtmlTag="false">
 
-<!-- Begin Default Content REMOVE THIS -->
-<h1>Congratulations</h1>
-This is your new Page
-<!-- End Default Content REMOVE THIS -->
+    <apex:form >
+        <html>
+        
+            <head>
+                <c:GF_CommonImports ></c:GF_CommonImports>
+            </head>
+                
+            <body>
+                
+                <div class="panel panel-primary">
+
+                    <div class="panel-body">
+                            <div class="bs-example">
+                                <div class="well">
+                                    <p class="bg-info">
+        
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <p class="text-center">
+                                                    <img data-src="holder.js/350x400" class="img-rounded" src="{!postImage}" data-holder-rendered="true" style="width: 100%; height: 100;" onerror="this.src='{!URLFOR($Resource.resources, 'resources/img/NoImage.png')}';" />
+                                                </p>
+                                            </div>
+                                             
+                                            
+                                          <apex:outputPanel styleClass="form-group">
+                                               <div class="form-group">
+                                                   <h3>
+                                                       <apex:outputLabel value="{!Geo_Location__c.Title__c}" html-placeholder="Post Title" rendered="{!Geo_Location__c.Title__c !=null}"/>
+                                                   </h3>
+                                               </div>
+                                               <div class="form-group">
+                                                   <apex:outputLabel value="{!Geo_Location__c.Description__c}" html-placeholder="Post Description" rendered="{!Geo_Location__c.Description__c!=null}"/>
+                                               </div>
+                                          </apex:outputPanel>
+                                          
+
+                                          <apex:pagemessages />
+
+                                    </form>
+                                </p>
+                                <c:GF_Footer pgId="5" /> 
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </body>
+            
+        </html>
+    </apex:form>
+
+
 </apex:page>

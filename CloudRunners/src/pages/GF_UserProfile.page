@@ -1,4 +1,12 @@
-<apex:page >
+<!-- 
+/******************************************
+* Author : Inshar Anas
+* Description : User Profile page
+* Created Date : 2014-12-15
+*******************************************/
+-->
+
+<apex:page showHeader="false" controller="GF_UserProfileController">
 <!-- Begin Default Content REMOVE THIS -->
 <h1>Congratulations</h1>
 This is your new Page

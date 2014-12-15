@@ -10,9 +10,8 @@
 
     
     <head>
-	    <apex:stylesheet value="{!URLFOR($Resource.resources, 'resources/css/bootstrap.min.css')}"/>
-	    <script src="{!URLFOR($Resource.resources, 'resources/js/bootstrap.min.js')}" />
-	    <script src="{!URLFOR($Resource.resources, 'resources/js/jQuery2.0.2.min.js')}" />
+    
+	    <c:GF_CommonImports ></c:GF_CommonImports>
 	    
 	    <script type="text/javascript">
 	    

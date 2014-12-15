@@ -9,6 +9,13 @@ public with sharing class GF_Utils {
 		
 	} 
 	
+	/**
+	* load the user
+	*/
+	public static User loadUser(String userId) {
+		return [ SELECT u.LastName, u.FirstName, u.Email FROM User u WHERE u.Id =: userId ];
+	}
+	
 	/** 
 	* this method will return all the locations for a given user
 	*/

@@ -14,7 +14,7 @@
   <apex:repeat value="{!locationsDTO}" var="gl" id="geoLocations"> 
   	 <br />
   	
-  	<a href="/GF_PostDetail?{!gl.id}"><b>{!gl.name}</b></a> <br />
+  	<a href="/apex/GF_PostDetail?id={!gl.id}"><b>{!gl.name}</b></a> <br />
   	
   	{!gl.description} <br />
   	
