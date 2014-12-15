@@ -3,4 +3,9 @@
     <apiVersion>27.0</apiVersion>
     <availableInTouch>true</availableInTouch>
     <label>GF_PostDetail</label>
+    <packageVersions>
+        <majorNumber>1</majorNumber>
+        <minorNumber>8</minorNumber>
+        <namespace>sf_chttr_apps</namespace>
+    </packageVersions>
 </ApexPage>
