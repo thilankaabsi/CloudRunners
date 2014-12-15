@@ -5,9 +5,27 @@
  -->
 <apex:page showHeader="false"  standardStylesheets="false" cache="false" doctype="html-5.0"  controller="GF_MapViewerController" >
 	<head>
+		<!-- Google API -->
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfm-kQFwhgsiq9tqHRk9t56NuOiSmuhLQ" />
-		<script>
+		<c:GF_CommonImports ></c:GF_CommonImports>    
 		
+		<script>
+			var lat, lng;
+			var map;
+
+		    var image = {
+		        url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+		    };			
+			
+		    function addMarker(id, name, lat, lng, description, attId) {
+		        var marker = new google.maps.Marker({
+		                position: new google.maps.LatLng(lat, lng),
+		                map: map,
+		                icon: image,
+		                title: name
+		        }); 
+		    }			
+			
 		    function getLocations() {       
 		        GF_MapViewerController.getLocations(function (result, event) {
 		            if (event.status) {

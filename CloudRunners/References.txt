@@ -1,0 +1,7 @@
+Google Map functions
+--------------------
+https://developers.google.com/maps/documentation/javascript/examples/map-simple
+
+Get the Google API Key
+----------------------
+https://developers.google.com/maps/documentation/javascript/tutorial
