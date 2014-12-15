@@ -1,0 +1,49 @@
+<apex:component layout="none">
+    <apex:attribute name="pgId" description="" type="String" required="true"/>
+    
+    <div style="height:64px;" />
+    <div class="btn-group btn-group-justified ng-cloak" style="position:fixed; bottom:0; left:0;">
+        <a style="width:auto; border: 1px groove #020303; visibility:hidden;" class="btn btn-primary" href="/apex/Home" id="home1" onClick="showBlocker();"><img src="{!URLFOR($Resource.resources, 'resources/img/home.png')}" data-holder-rendered="true" /></a>
+        <a style="width:auto; border: 1px groove #020303; visibility:hidden;" class="btn btn-primary" href="/apex/GF_PostCapture" id="camera1" onClick="showBlocker();"><img src="{!URLFOR($Resource.resources, 'resources/img/camera.png')}" data-holder-rendered="true" /></a>
+        <a style="width:auto; border: 1px groove #020303; visibility:hidden;" class="btn btn-primary" href="/apex/GF_MapViewer" id="map1" onClick="showBlocker();"><img src="{!URLFOR($Resource.resources, 'resources/img/map.png')}" data-holder-rendered="true" /></a>
+        <a style="width:auto; border: 1px groove #020303; visibility:hidden;" class="btn btn-primary" href="/apex/GF_UserProfile" id="profile1" onClick="showBlocker();"><img src="{!URLFOR($Resource.resources, 'resources/img/profile.png')}" data-holder-rendered="true" /></a>
+    </div>
+    
+     <script> 
+        document.getElementById("home1").style.visibility = 'hidden';
+        document.getElementById("camera1").style.visibility = 'hidden';
+        document.getElementById("map1").style.visibility = 'hidden';
+        document.getElementById("profile1").style.visibility = 'hidden';
+        
+        if ({!pgId} == '1') {
+            document.getElementById("home1").style.display = 'none';
+            document.getElementById("camera1").style.visibility = 'visible';
+            document.getElementById("map1").style.visibility = 'visible';
+            document.getElementById("profile1").style.visibility = 'visible';
+
+        } else if ({!pgId} == '2') {
+            document.getElementById("home1").style.visibility = 'visible';
+            document.getElementById("camera1").style.display = 'none';
+            document.getElementById("map1").style.visibility = 'visible';
+            document.getElementById("profile1").style.visibility = 'visible';
+            
+        } else if ({!pgId} == '3') {
+            document.getElementById("home1").style.visibility = 'visible';
+            document.getElementById("camera1").style.visibility = 'visible';
+            document.getElementById("map1").style.display = 'none';
+            document.getElementById("profile1").style.visibility = 'visible';
+            
+        } else if ({!pgId} == '4') {
+            document.getElementById("home1").style.visibility = 'visible';
+            document.getElementById("camera1").style.visibility = 'visible';
+            document.getElementById("map1").style.visibility = 'visible';
+            document.getElementById("profile1").style.display = 'none';
+            
+        } else if ({!pgId} == '5') {
+            document.getElementById("home1").style.visibility = 'visible';
+            document.getElementById("camera1").style.visibility = 'visible';
+            document.getElementById("map1").style.visibility = 'visible';
+            document.getElementById("profile1").style.visibility = 'visible';
+        }                         
+    </script>    
+</apex:component>

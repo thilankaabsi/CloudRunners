@@ -1,0 +1,139 @@
+<!-- 
+ *************************************************************
+ * Description      : VF Page for GF Post Capture
+ * @author          : Shermal Warnakula
+ * @since           : 15 Dec 2014
+ ************************************************************* 
+ -->
+
+<apex:page id="geoLocationPg" extensions="GF_PostCaptureExtension" standardController="Geo_Location__c" doctype="html-5.0" standardStylesheets="false" showHeader="false" sideBar="false" applyHtmlTag="false">
+
+    
+    <head>
+	    <apex:stylesheet value="{!URLFOR($Resource.resources, 'resources/css/bootstrap.min.css')}"/>
+	    <script src="{!URLFOR($Resource.resources, 'resources/js/bootstrap.min.js')}" />
+	    <script src="{!URLFOR($Resource.resources, 'resources/js/jQuery2.0.2.min.js')}" />
+	    
+	    <script type="text/javascript">
+	    
+	    	//Global variables
+			var geoImgData = null;
+			var geoImgFileName = null;
+			
+			//Document ready function
+			$(document).ready(function() {
+				$("#geoPhotoButton").click(function() {
+					$("#geoPhotoFile").click();
+				});
+				
+				$("#geoPhotoFile").change(geoPhotoHandler);
+			});
+		
+			
+			//Geo Photo Handler
+			function geoPhotoHandler(event) {
+				var geoPhotoFile = event.target.files[0];
+				var imgReader = new FileReader();
+				
+				imgReader.onload = (function () {
+				
+					return function(e) {
+						var geoImgDataURL = e.target.result;
+						// Extract raw base64 data from data URL
+	                    geoImgData = geoImgDataURL.split(',')[1];
+	                    geoImgFileName = geoPhotoFile.name;
+						
+						//Thumbnail Img
+						var geoImg = $('<img class="center" width="100%">');
+						geoImg.attr('src', geoImgDataURL);
+						$('#geoPhotoThumbNail').html(geoImg );
+	                    $('#geoPhotoContent').css("display", "block");
+	                    
+	                    document.getElementById('geoLocationPg:formId:hdnGeoImgData').value = geoImgData;
+	                    document.getElementById('geoLocationPg:formId:hdnGeoImgFileName').value = geoImgFileName;  
+	                    
+					};
+				
+				})(geoPhotoFile);
+				
+				imgReader.readAsDataURL(geoPhotoFile);
+			}
+			
+        // Succesfully Save
+        function succesfullySave() {
+            alert("Succesfully Saved");
+        }          
+            
+         // onLoad
+         function onLoad() {
+             navigator.geolocation.getCurrentPosition(curLocationSuccess, curLocationError);          
+         }
+            
+         // Current Location Success
+         function curLocationSuccess(position) {        
+             var latitude  = position.coords.latitude;
+             var longitude = position.coords.longitude;         
+                    
+             document.getElementById('geoLocationPg:formId:hdnGeoImgLatitude').value = latitude;                
+             document.getElementById('geoLocationPg:formId:hdnGeoImgLongitude').value = longitude;                                
+         }          
+         
+         // Current Location Error
+         function curLocationError() {}     
+            
+         onLoad();
+	    
+	    </script>
+    </head>
+    
+    <body>        
+        <apex:form id="formId" enctype="multipart/form-data">
+        
+            <apex:inputHidden id="hdnGeoImgData" value="{!base64GeoImgData}" />
+            <apex:inputHidden id="hdnGeoImgFileName" value="{!geoImgFileName }" />
+            <apex:inputHidden id="hdnGeoImgLatitude" value="{!geoImgLatitude}" />
+            <apex:inputHidden id="hdnGeoImgLongitude" value="{!geoImgLongitude}" />
+            
+            <div class="panel panel-primary">
+            
+                 <div class="panel-body">
+                    <div class="bs-example">
+                        <div class="well">
+                            <p class="bg-info">
+
+								<form role="form">
+                                   
+                                    <div class="form-group">
+                                        <input type="file" id="geoPhotoFile" accept="image/*" style="display: none;"/>                                    
+                                        <button type="button" class="btn btn-primary btn-lg btn-block" id="geoPhotoButton">Take Picture</button>
+                                    </div> 
+                                    <div id="geoPhotoContent" style="display: none;">
+                                        <div class="form-group">                                                             
+                                            <section id="geoPhotoThumbNail" />                                        
+                                        </div>  
+                                        <div class="form-group">
+                                            <apex:inputText styleClass="form-control" value="{!geoLocation.Title__c}" id="PostTitleID"  html-placeholder="Post Title"/>
+                                        </div>
+                                        <div class="form-group">                                    
+                                            <apex:inputTextarea styleClass="form-control" value="{!geoLocation.Description__c}" id="PostDescriptionID" rows="3" html-placeholder="Post Description"/>
+                                        </div>                                          
+                                        <div class="form-group">
+                                            <apex:commandButton value="Save"  styleClass="btn btn-primary btn-lg btn-block" id="geoPhotoSaveButton" onComplete="succesfullySave();" reRender="formId" onClick="showBlocker();" />                                     
+                                        </div> 
+                                    </div>                                                                                                 
+                                </form>  
+
+                            </p>
+                            
+                            <c:GF_Footer pgId="2" /> 	
+                  
+                        </div>
+                    </div>
+                </div>      
+                
+            </div>
+        </apex:form>
+    </body>
+
+
+</apex:page>

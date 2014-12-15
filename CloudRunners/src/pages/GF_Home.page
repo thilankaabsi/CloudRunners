@@ -1,0 +1,11 @@
+<!-- 
+/******************************************
+* Author : Inshar Anas
+* Description : Home page
+* Created Date : 2014-12-15
+*******************************************/
+-->
+<apex:page showHeader="false">
+  
+  <h1>GeoForce Home</h1>
+</apex:page>
