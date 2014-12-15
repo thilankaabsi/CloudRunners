@@ -1,0 +1,13 @@
+#Mon Dec 15 15:32:32 IST 2014
+eclipse.preferences.version=1
+endpointApiVersion=27.0
+endpointEnvironment=Production/Developer Edition
+endpointServer=www.salesforce.com
+httpsProtocol=true
+ideVersion=27.0
+keependpoint=false
+metadataFormatVersion=27.0
+namespacePrefix=
+packageName=unpackaged
+readTimeout=400
+username=cloudrunners@asbi.be
