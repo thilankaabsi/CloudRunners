@@ -10,6 +10,9 @@ global class GF_SendPostNotificationsBatch implements Database.Batchable<sObject
 	private String messageBody;
 	public final String messageSubject = 'GeoForce Daily Notification';
 	
+	// Constructor
+	global GF_SendPostNotificationsBatch(){}
+	
 	global Database.querylocator start(Database.BatchableContext BC){
 		this.query = 'SELECT g.Title__c, g.Id, g.Description__c FROM Geo_Location__c g WHERE g.CreatedDate = TODAY';
 		return Database.getQueryLocator(query);

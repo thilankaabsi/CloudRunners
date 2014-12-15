@@ -53,5 +53,59 @@ public with sharing class GF_PostDetailExtension {
             ApexPages.addMessage(errMsg);
         }
     }
+    	
+    
+    public void edit() {
+    	
+        try{      
+            this.postEditable = false;
+            			
+        } Catch(Exception ex){
+            ApexPages.Message errMsg = new ApexPages.Message(ApexPages.severity.INFO, ex.getMessage());  
+            ApexPages.addMessage(errMsg);
+        }
+    }
+    	
+   	public void save() {
+        try{      
+            this.glc.Name = this.glc.Title__c;
+            
+            update this.glc;
+            
+            this.postEditable = true;
+            ApexPages.Message errMsg = new ApexPages.Message(ApexPages.severity.INFO, 'Succesfully Saved');  
+            ApexPages.addMessage(errMsg);
+        }
+        Catch(Exception ex){
+            ApexPages.Message errMsg = new ApexPages.Message(ApexPages.severity.INFO, ex.getMessage());  
+            ApexPages.addMessage(errMsg);
+        }
+    }
+
+    public void remove() {
+        try{      
+              
+            delete this.glc;
+            
+            this.postEditable = true;
+            ApexPages.Message errMsg = new ApexPages.Message(ApexPages.severity.INFO, 'Succesfully Deleted');  
+            ApexPages.addMessage(errMsg);
+        }
+        Catch(Exception ex){
+            ApexPages.Message errMsg = new ApexPages.Message(ApexPages.severity.INFO, ex.getMessage());  
+            ApexPages.addMessage(errMsg);
+        }
+    }
+    
+    public void cancel() {
+    	try{      
+              
+            this.postEditable = true;
+        }
+        Catch(Exception ex){
+            ApexPages.Message errMsg = new ApexPages.Message(ApexPages.severity.INFO, ex.getMessage());  
+            ApexPages.addMessage(errMsg);
+        }
+    }
 
 }

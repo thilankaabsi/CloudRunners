@@ -1,127 +1,127 @@
 <!-- 
-	Thilanka Kumarasingha
-	This page will be used to show all the locations in the map.
-	From this map, users can see what are the attractions etc ...
+    Thilanka Kumarasingha
+    This page will be used to show all the locations in the map.
+    From this map, users can see what are the attractions etc ...
  -->
 <apex:page showHeader="false"  standardStylesheets="false" cache="false" doctype="html-5.0"  controller="GF_MapViewerController" >
-	<head>
-	    <style type="text/css">
-	        html { height: 100% }
-	        body { height: 100%; margin: 0; padding: 0 }
-	        #map-canvas { height: 100%; margin: 0; padding: 0; }
-	        .screenSize { height: 100%; margin: 0; padding: 0; }
-	        .baseSize { height: 90%; margin: 0; padding: 0; }
-	    </style>
-	
-		<!-- Google API -->
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfm-kQFwhgsiq9tqHRk9t56NuOiSmuhLQ" />
-		<c:GF_CommonImports ></c:GF_CommonImports>    
-		
-		<script>
-			var lat, lng;
-			var map;
-
-		    var image = {
-		        url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-		    };			
-			
-			function createContent(id, name, description, attId) {
+    <head>
+        <style type="text/css">
+            html { height: 100% }
+            body { height: 100%; margin: 0; padding: 0 }
+            #map-canvas { height: 100%; margin: 0; padding: 0; }
+            .screenSize { height: 100%; margin: 0; padding: 0; }
+            .baseSize { height: 90%; margin: 0; padding: 0; }
+        </style>
     
-		      var link = '/apex/GF_PostDetail?id=' + id;    
-		      return '<div id="content">'+
-		          '<div id="siteNotice">'+
-		          '</div>'+
-		          '<h3 id="firstHeading" class="firstHeading">' + name + '</h3>'+
-		          '<div id="bodyContent">'+
-		          '<div style="float:left; width:15%;"><p style="margin:5px;">'+
-		          '<img src="/servlet/servlet.FileDownload?file=' + attId + '" width="100%" />'+
-		          '</p></div>'+
-		          '<div style="float:right; width:85%">'+
-		          '<p style="margin:5px; text-align:justify;">' + description + '</p>'+
-		          '</div>'+
-		          '<p><a href="' + link + '">More Info</a>'+            
-		          '</div>'+
-		          '</div>';        
-		    }
-			
-		    function addMarker(id, name, lat, lng, description, attId) {
-		        var marker = new google.maps.Marker({
-		                position: new google.maps.LatLng(lat, lng),
-		                map: map,
-		                icon: image,
-		                title: name
-		        }); 
+        <!-- Google API -->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfm-kQFwhgsiq9tqHRk9t56NuOiSmuhLQ" />
+        <c:GF_CommonImports ></c:GF_CommonImports>    
+        
+        <script>
+            var lat, lng;
+            var map;
 
-		        var overlayContent = createContent(id, name, description, attId); 
-		        var infowindow = new google.maps.InfoWindow({
-		            content: overlayContent            
-		        });  
-		                
-		        google.maps.event.addListener(marker, 'click', function() {
-		            infowindow.open(map,marker);
-		        });
-		    }			
-			
-		    function getLocations() {       
-		        GF_MapViewerController.getLocations(function (result, event) {
-		        	console.info('event status :' + event.status + ' result.length' + result.length);
-		            if (event.status) {
-		                for (i = 0; i < result.length; i++) {
-		                    var locationName = result[i].name;
-		                    
-		                    var latitude = result[i].latitude;
-		                    var longitude = result[i].longitude;
-		                    var description = result[i].description;
-		                    var attId = result[i].attId;
-		                    
-		                    var id = result[i].id;		                    
-		                    var latlng = new google.maps.LatLng(latitude, longitude);		                    
-		                    
-		                    // add the markers to the page
-		                    addMarker(id, locationName, latitude, longitude, description, attId);
-		                }
-		            }
-		       });
-		    }			
-		
-			function initialize() {        
-     			navigator.geolocation.getCurrentPosition(success, error);
-    		}
-    		
-		    function success(position) {        
-		        var latitude  = position.coords.latitude;
-		        var longitude = position.coords.longitude;
-		        
-		        console.info('latitude :' + latitude + ' longitude :' + longitude);
-		        var userLatLng = new google.maps.LatLng(latitude, longitude);
-		        var mapOptions = {
-		            center: userLatLng,
-		            zoom: 15
-		        };
-		        
-		        map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
-		                
-		        // show markers
-		        var marker = new google.maps.Marker({
-		            position: userLatLng,
-		            title: 'My Location',
-		            map: map
-		        });  
-		        
-		        getLocations();               
-		              
-		    };
-    		
-    		
-    		function error() {
-    		};
-    		
-    		/** initialize the map loading */
-    		google.maps.event.addDomListener(window, 'load', initialize);
-		</script>
-	</head>
-	<body>
-		<div class="baseSize panel panel-primary">
+            var image = {
+                url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+            };          
+            
+            function createContent(id, name, description, attId) {
+    
+              var link = '/apex/GF_PostDetail?id=' + id;    
+              return '<div id="content">'+
+                  '<div id="siteNotice">'+
+                  '</div>'+
+                  '<h3 id="firstHeading" class="firstHeading">' + name + '</h3>'+
+                  '<div id="bodyContent">'+
+                  '<div style="float:left; width:15%;"><p style="margin:5px;">'+
+                  '<img src="/servlet/servlet.FileDownload?file=' + attId + '" width="100%" />'+
+                  '</p></div>'+
+                  '<div style="float:right; width:85%">'+
+                  '<p style="margin:5px; text-align:justify;">' + description + '</p>'+
+                  '</div>'+
+                  '<p><a href="' + link + '">More Info</a>'+            
+                  '</div>'+
+                  '</div>';        
+            }
+            
+            function addMarker(id, name, lat, lng, description, attId) {
+                var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(lat, lng),
+                        map: map,
+                        icon: image,
+                        title: name
+                }); 
+
+                var overlayContent = createContent(id, name, description, attId); 
+                var infowindow = new google.maps.InfoWindow({
+                    content: overlayContent            
+                });  
+                        
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.open(map,marker);
+                });
+            }           
+            
+            function getLocations() {       
+                GF_MapViewerController.getLocations(function (result, event) {
+                    console.info('event status :' + event.status + ' result.length' + result.length);
+                    if (event.status) {
+                        for (i = 0; i < result.length; i++) {
+                            var locationName = result[i].name;
+                            
+                            var latitude = result[i].latitude;
+                            var longitude = result[i].longitude;
+                            var description = result[i].description;
+                            var attId = result[i].attId;
+                            
+                            var id = result[i].id;                          
+                            var latlng = new google.maps.LatLng(latitude, longitude);                           
+                            
+                            // add the markers to the page
+                            addMarker(id, locationName, latitude, longitude, description, attId);
+                        }
+                    }
+               });
+            }           
+        
+            function initialize() {        
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
+            
+            function success(position) {        
+                var latitude  = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                
+                console.info('latitude :' + latitude + ' longitude :' + longitude);
+                var userLatLng = new google.maps.LatLng(latitude, longitude);
+                var mapOptions = {
+                    center: userLatLng,
+                    zoom: 15
+                };
+                
+                map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+                        
+                // show markers
+                var marker = new google.maps.Marker({
+                    position: userLatLng,
+                    title: 'My Location',
+                    map: map
+                });  
+                
+                getLocations();               
+                      
+            };
+            
+            
+            function error() {
+            };
+            
+            /** initialize the map loading */
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    </head>
+    <body>
+        <div class="baseSize panel panel-primary">
             <c:GF_Header pgId="3" />            
             <div class="screenSize panel-body">
                 <div class="screenSize bs-example">
@@ -134,5 +134,5 @@
             </div>
             <c:GF_Footer pgId="3" />                
         </div> 
-	</body>
+    </body>
 </apex:page>

@@ -5,20 +5,76 @@
 * Created Date : 2014-12-15
 *******************************************/
 -->
-<apex:page showHeader="false" controller="GF_HomeController">
-  
-  <h1>GeoForce Home</h1>
-  
-  <br />
-  
-  <apex:repeat value="{!locationsDTO}" var="gl" id="geoLocations"> 
-  	 <br />
-  	
-  	<a href="/apex/GF_PostDetail?id={!gl.id}"><b>{!gl.name}</b></a> <br />
-  	
-  	{!gl.description} <br />
-  	
-  	<img src="/servlet/servlet.FileDownload?file={!gl.attId}" /> <br />
-  </apex:repeat>
+<apex:page showHeader="false" standardStylesheets="false" cache="false" doctype="html-5.0" controller="GF_HomeController">
+
+
+<html>
+
+    <head>
+        <c:GF_CommonImports ></c:GF_CommonImports>
+        
+        <script>
+            var lastScrollTop = 0;
+            $( document ).ready(function() {
+                bindEvents();
+            });
+            
+            function bindEvents() {
+                $( window ).scroll(function() {
+                    var st = $(this).scrollTop();
+                    if (st > lastScrollTop){
+                        var showMore = $("#showMoreLink").val();                        
+                        if(showMore=='true') {                          
+                            scrollAction();
+                        }
+                    }
+                    lastScrollTop = st;
+                });
+            }
+            
+        </script>
+    </head>
+    
+    <body>
+    
+        <div class="panel panel-primary">
+    
+            <c:GF_Header pgId="1" />    
+              
+            <div class="panel-body">
+                <div class="bs-example">
+                    <apex:form >
+                        <apex:outputPanel id="resultsSection">
+                            <apex:repeat value="{!locationsDTO}" var="gl">
+                                <div class="row">
+                                  <div>
+                                    <div class="thumbnail">
+                                      <a href="/apex/GF_PostDetail?id={!gl.id}">
+                                        <img data-src="holder.js/350x400" class="img-rounded" src="/servlet/servlet.FileDownload?file={!gl.attId}" data-holder-rendered="true" style="width: 100%; height: 100%;" />
+                                      </a>
+                                      <div class="caption">
+                                        <h3>{!gl.title}</h3>
+                                        <p>{!gl.description}</p>
+                                      </div>
+                                    </div>
+                                   </div>
+                                </div>
+                            </apex:repeat>                                    
+                                
+                            <div style="width:100%; text-align:center;">
+                                <apex:commandLink rendered="{!showMoreLink}" value="More" reRender="resultsSection" action="{!loadLocations}"></apex:commandLink>                                       
+                            </div>                               
+                            <br /><br /><br />
+                            <br />  
+                            <input id="showMoreLink" value="{!showMoreLink}" type="hidden"></input>                      
+                            <apex:actionFunction oncomplete="stopAnimation();" name="scrollAction" reRender="resultsSection" action="{!loadLocations}"></apex:actionFunction>
+                        </apex:outputPanel>
+                    </apex:form>
+                    <c:GF_Footer pgId="1" />   
+                </div>
+            </div>                  
+        </div>
+    </body>
+</html>
   
 </apex:page>

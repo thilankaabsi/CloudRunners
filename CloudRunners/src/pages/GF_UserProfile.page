@@ -1,6 +1,6 @@
 <!-- 
-	Show and update user profile
-	Inshar Anas 
+    Show and update user profile
+    Inshar Anas 
  -->
 <apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" cache="true" standardController="User" applyHtmlTag="false" extensions="GF_UserProfileController">
 <html>

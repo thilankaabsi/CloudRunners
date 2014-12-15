@@ -49,6 +49,22 @@ public with sharing class GF_PostCaptureExtension {
             this.geoImg.Name = this.geoImgFileName;
             this.geoImg.body = Encodingutil.base64Decode(this.base64GeoImgData);
             insert geoImg;
+            			
+            //checks to decide whether the post should go on chatter
+            if (this.isPostOnChat) {
+            	//Chatter integration
+            	FeedItem post = new FeedItem();
+            	post.ParentId = Userinfo.getUserId();
+            	if(this.geoLocation.Title__c != null){
+            		post.Body = this.geoLocation.Title__c + ',-' + this.geoLocation.Description__c;
+            	} else {
+            		post.Body = this.geoLocation.Description__c;
+            	}
+            	post.ContentData =  EncodingUtil.base64Decode(this.base64GeoImgData);
+                post.ContentFileName = this.geoImgFileName;
+                insert post;
+            	
+            }
             
             return null;
 			

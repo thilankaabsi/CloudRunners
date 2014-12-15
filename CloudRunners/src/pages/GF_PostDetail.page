@@ -18,7 +18,7 @@
                 
                 <div class="panel panel-primary">
                 
-                	<c:GF_Header pgId="5" infoName="{!Geo_Location__c.Name}" />
+                    <c:GF_Header pgId="5" infoName="{!Geo_Location__c.Name}" />
 
                     <div class="panel-body">
                             <div class="bs-example">
@@ -32,7 +32,13 @@
                                                 </p>
                                             </div>
                                              
-                                            
+                                            <div class="btn-group btn-group-justified ng-cloak">
+                                                <a style="width:auto; border: 1px groove #020303;" class="btn btn-primary" href='http://www.facebook.com'><img src="{!URLFOR($Resource.resources, 'resources/img/f.png')}" data-holder-rendered="true" /></a>
+                                                <a style="width:auto; border: 1px groove #020303;" class="btn btn-primary" href='http://www.twitter.com'><img src="{!URLFOR($Resource.resources, 'resources/img/t.png')}" data-holder-rendered="true" /></a>
+                                                <a style="width:auto; border: 1px groove #020303;" class="btn btn-primary" href='http://www.linkedin.com'><img src="{!URLFOR($Resource.resources, 'resources/img/l.png')}" data-holder-rendered="true" /></a>
+                                                <a style="width:auto; border: 1px groove #020303;" class="btn btn-primary" href='http://www.googleplus.com'><img src="{!URLFOR($Resource.resources, 'resources/img/g.png')}" data-holder-rendered="true" /></a>
+                                            </div>
+                                                                                        
                                           <apex:outputPanel styleClass="form-group" rendered="{!postEditable}">
                                                <div class="form-group">
                                                    <h3>
@@ -55,7 +61,10 @@
                                                </div>
                                           </apex:outputPanel>
                                           
-                                          <div class="btn-group btn-group-justified ng-cloak" style="text-align: center;">                         
+                                          <div class="btn-group btn-group-justified ng-cloak" style="text-align: center;">     
+                                              <apex:commandButton value="Cancel" action="{!Cancel}" style="width:auto;" styleClass="btn btn-primary" rendered="{!!postEditable}" onClick="showBlocker();" />
+                                              <apex:commandButton value="Delete" action="{!remove}" style="width:auto;" styleClass="btn btn-primary" rendered="{!!postEditable}" onClick="showBlocker();"/>
+                                              <apex:commandButton value="Save" action="{!Save}" style="width:auto;" styleClass="btn btn-primary" id="photoButton" rendered="{!!postEditable}" onClick="showBlocker();"/>                    
                                               <apex:commandButton value="Edit" action="{!Edit}" style="width:auto;" styleClass="btn btn-primary" rendered="{!postEditable}" onClick="showBlocker();"/>
                                           </div>
                                           

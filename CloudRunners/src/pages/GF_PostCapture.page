@@ -11,53 +11,53 @@
     
     <head>
     
-	    <c:GF_CommonImports ></c:GF_CommonImports>
-	    
-	    <script type="text/javascript">
-	    
-	    	//Global variables
-			var geoImgData = null;
-			var geoImgFileName = null;
-			
-			//Document ready function
-			$(document).ready(function() {
-				$("#geoPhotoButton").click(function() {
-					$("#geoPhotoFile").click();
-				});
-				
-				$("#geoPhotoFile").change(geoPhotoHandler);
-			});
-		
-			
-			//Geo Photo Handler
-			function geoPhotoHandler(event) {
-				var geoPhotoFile = event.target.files[0];
-				var imgReader = new FileReader();
-				
-				imgReader.onload = (function () {
-				
-					return function(e) {
-						var geoImgDataURL = e.target.result;
-						// Extract raw base64 data from data URL
-	                    geoImgData = geoImgDataURL.split(',')[1];
-	                    geoImgFileName = geoPhotoFile.name;
-						
-						//Thumbnail Img
-						var geoImg = $('<img class="center" width="100%">');
-						geoImg.attr('src', geoImgDataURL);
-						$('#geoPhotoThumbNail').html(geoImg );
-	                    $('#geoPhotoContent').css("display", "block");
-	                    
-	                    document.getElementById('geoPostCapturePg:formId:hdnGeoImgData').value = geoImgData;
-	                    document.getElementById('geoPostCapturePg:formId:hdnGeoImgFileName').value = geoImgFileName;  
-	                    
-					};
-				
-				})(geoPhotoFile);
-				
-				imgReader.readAsDataURL(geoPhotoFile);
-			}
-			
+        <c:GF_CommonImports ></c:GF_CommonImports>
+        
+        <script type="text/javascript">
+        
+            //Global variables
+            var geoImgData = null;
+            var geoImgFileName = null;
+            
+            //Document ready function
+            $(document).ready(function() {
+                $("#geoPhotoButton").click(function() {
+                    $("#geoPhotoFile").click();
+                });
+                
+                $("#geoPhotoFile").change(geoPhotoHandler);
+            });
+        
+            
+            //Geo Photo Handler
+            function geoPhotoHandler(event) {
+                var geoPhotoFile = event.target.files[0];
+                var imgReader = new FileReader();
+                
+                imgReader.onload = (function () {
+                
+                    return function(e) {
+                        var geoImgDataURL = e.target.result;
+                        // Extract raw base64 data from data URL
+                        geoImgData = geoImgDataURL.split(',')[1];
+                        geoImgFileName = geoPhotoFile.name;
+                        
+                        //Thumbnail Img
+                        var geoImg = $('<img class="center" width="100%">');
+                        geoImg.attr('src', geoImgDataURL);
+                        $('#geoPhotoThumbNail').html(geoImg );
+                        $('#geoPhotoContent').css("display", "block");
+                        
+                        document.getElementById('geoPostCapturePg:formId:hdnGeoImgData').value = geoImgData;
+                        document.getElementById('geoPostCapturePg:formId:hdnGeoImgFileName').value = geoImgFileName;  
+                        
+                    };
+                
+                })(geoPhotoFile);
+                
+                imgReader.readAsDataURL(geoPhotoFile);
+            }
+            
         // Succesfully Save
         function succesfullySave() {
             alert("Succesfully Saved");
@@ -81,8 +81,8 @@
          function curLocationError() {}     
             
          onLoad();
-	    
-	    </script>
+        
+        </script>
     </head>
     
     <body>        
@@ -95,14 +95,14 @@
             
             <div class="panel panel-primary">
             
-            	<c:GF_Header pgId="2" />
+                <c:GF_Header pgId="2" />
             
                  <div class="panel-body">
                     <div class="bs-example">
                         <div class="well">
                             <p class="bg-info">
 
-								<form role="form">
+                                <form role="form">
                                    
                                     <div class="form-group">
                                         <input type="file" id="geoPhotoFile" accept="image/*" style="display: none;"/>                                    
@@ -117,7 +117,12 @@
                                         </div>
                                         <div class="form-group">                                    
                                             <apex:inputTextarea styleClass="form-control" value="{!geoLocation.Description__c}" id="PostDescriptionID" rows="3" html-placeholder="Post Description"/>
-                                        </div>                                          
+                                        </div>       
+                                        <div class="checkbox">
+                                            <label>
+                                                <apex:inputCheckbox value="{!isPostOnChat}" /> Post on Chatter                                                 
+                                            </label>
+                                        </div>                                   
                                         <div class="form-group">
                                             <apex:commandButton value="Save" action="{!saveGeoLocationInfo}" styleClass="btn btn-primary btn-lg btn-block" id="geoPhotoSaveButton" onComplete="succesfullySave();" reRender="formId" />                                     
                                         </div> 
@@ -126,7 +131,7 @@
 
                             </p>
                             
-                            <c:GF_Footer pgId="2" /> 	
+                            <c:GF_Footer pgId="2" />    
                   
                         </div>
                     </div>
