@@ -9,14 +9,13 @@ public with sharing class GF_Utils {
 		
 	} 
 	
-	/**
+	/** 
 	* this method will return all the locations for a given user
 	*/
 	public static List<Geo_Location__c> getAllLocations( String userId ) {
-		return [SELECT Description__c, Title__c, Name, 
-					Location__latitude__s, Location__longitude__s
-					FROM Geo_Location__c
-					WHERE User__c=:userId];		
+		return [SELECT id, name, Title__c, Description__c, Location__latitude__s, Location__longitude__s, 
+        							(SELECT Id, Name FROM Attachments) FROM Geo_Location__c
+																		WHERE User__c=:userId];		
 	}
 	
 	/**

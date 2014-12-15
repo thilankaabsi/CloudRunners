@@ -5,15 +5,17 @@
 *******************************************/
 public class GF_HomeController {
 	
+	public List<LocationDTO> locationsDTO { get; set; }
+	
 	//Constructor
 	public GF_HomeController() {
-	
+		this.loadLocations();
 	}
 	
 	// Get all locations of the user
 	public void loadLocations() {
 		
-		List<Geo_Location__c> locations = GF_Utils.getAllLocations();
+		this.locationsDTO = GF_Utils.getAllLocationsMappedForUser(UserInfo.getUserId());
 		
 	}
 

@@ -28,6 +28,7 @@
 			
 		    function getLocations() {       
 		        GF_MapViewerController.getLocations(function (result, event) {
+		        	console.info('event status :' + event.status + ' result.length' + result.length);
 		            if (event.status) {
 		                for (i = 0; i < result.length; i++) {
 		                    var locationName = result[i].name;
@@ -40,6 +41,8 @@
 		                    var id = result[i].id;		                    
 		                    var latlng = new google.maps.LatLng(latitude, longitude);		                    
 		                    
+		                    // add the markers to the page
+		                    addMarker(id, locationName, latitude, longitude, description, attId);
 		                }
 		            }
 		       });
@@ -53,6 +56,7 @@
 		        var latitude  = position.coords.latitude;
 		        var longitude = position.coords.longitude;
 		        
+		        console.info('latitude :' + latitude + ' longitude :' + longitude);
 		        var userLatLng = new google.maps.LatLng(latitude, longitude);
 		        var mapOptions = {
 		            center: userLatLng,
@@ -81,6 +85,6 @@
 		</script>
 	</head>
 	<body>
-		<div id="map-canvas"></div>
+		<div style="height: 500px; width: 800px;" id="map-canvas"></div>
 	</body>
 </apex:page>
