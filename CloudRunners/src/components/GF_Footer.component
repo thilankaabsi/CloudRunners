@@ -3,7 +3,7 @@
     
     <div style="height:64px;" />
     <div class="btn-group btn-group-justified ng-cloak" style="position:fixed; bottom:0; left:0;">
-        <a style="width:auto; border: 1px groove #020303; visibility:hidden;" class="btn btn-primary" href="/apex/Home" id="home1" onClick="showBlocker();"><img src="{!URLFOR($Resource.resources, 'resources/img/home.png')}" data-holder-rendered="true" /></a>
+        <a style="width:auto; border: 1px groove #020303; visibility:hidden;" class="btn btn-primary" href="/apex/GF_Home" id="home1" onClick="showBlocker();"><img src="{!URLFOR($Resource.resources, 'resources/img/home.png')}" data-holder-rendered="true" /></a>
         <a style="width:auto; border: 1px groove #020303; visibility:hidden;" class="btn btn-primary" href="/apex/GF_PostCapture" id="camera1" onClick="showBlocker();"><img src="{!URLFOR($Resource.resources, 'resources/img/camera.png')}" data-holder-rendered="true" /></a>
         <a style="width:auto; border: 1px groove #020303; visibility:hidden;" class="btn btn-primary" href="/apex/GF_MapViewer" id="map1" onClick="showBlocker();"><img src="{!URLFOR($Resource.resources, 'resources/img/map.png')}" data-holder-rendered="true" /></a>
         <a style="width:auto; border: 1px groove #020303; visibility:hidden;" class="btn btn-primary" href="/apex/GF_UserProfile" id="profile1" onClick="showBlocker();"><img src="{!URLFOR($Resource.resources, 'resources/img/profile.png')}" data-holder-rendered="true" /></a>

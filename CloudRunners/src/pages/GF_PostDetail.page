@@ -1,0 +1,14 @@
+<!-- 
+ *************************************************************
+ * Description      : VF Page for GF Post Detail Page
+ * @author          : Shermal Warnakula
+ * @since           : 15 Dec 2014
+ ************************************************************* 
+ -->
+<apex:page id="geoPostDetailPg" standardController="Geo_Location__c"  doctype="html-5.0" standardStylesheets="false" showHeader="false" sideBar="false" applyHtmlTag="false">
+
+<!-- Begin Default Content REMOVE THIS -->
+<h1>Congratulations</h1>
+This is your new Page
+<!-- End Default Content REMOVE THIS -->
+</apex:page>

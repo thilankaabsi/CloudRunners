@@ -6,7 +6,7 @@
  ************************************************************* 
  -->
 
-<apex:page id="geoLocationPg" extensions="GF_PostCaptureExtension" standardController="Geo_Location__c" doctype="html-5.0" standardStylesheets="false" showHeader="false" sideBar="false" applyHtmlTag="false">
+<apex:page id="geoPostCapturePg" standardController="Geo_Location__c" extensions="GF_PostCaptureExtension" doctype="html-5.0" standardStylesheets="false" showHeader="false" sideBar="false" applyHtmlTag="false">
 
     
     <head>
@@ -49,8 +49,8 @@
 						$('#geoPhotoThumbNail').html(geoImg );
 	                    $('#geoPhotoContent').css("display", "block");
 	                    
-	                    document.getElementById('geoLocationPg:formId:hdnGeoImgData').value = geoImgData;
-	                    document.getElementById('geoLocationPg:formId:hdnGeoImgFileName').value = geoImgFileName;  
+	                    document.getElementById('geoPostCapturePg:formId:hdnGeoImgData').value = geoImgData;
+	                    document.getElementById('geoPostCapturePg:formId:hdnGeoImgFileName').value = geoImgFileName;  
 	                    
 					};
 				
@@ -74,8 +74,8 @@
              var latitude  = position.coords.latitude;
              var longitude = position.coords.longitude;         
                     
-             document.getElementById('geoLocationPg:formId:hdnGeoImgLatitude').value = latitude;                
-             document.getElementById('geoLocationPg:formId:hdnGeoImgLongitude').value = longitude;                                
+             document.getElementById('geoPostCapturePg:formId:hdnGeoImgLatitude').value = latitude;                
+             document.getElementById('geoPostCapturePg:formId:hdnGeoImgLongitude').value = longitude;                                
          }          
          
          // Current Location Error
@@ -118,7 +118,7 @@
                                             <apex:inputTextarea styleClass="form-control" value="{!geoLocation.Description__c}" id="PostDescriptionID" rows="3" html-placeholder="Post Description"/>
                                         </div>                                          
                                         <div class="form-group">
-                                            <apex:commandButton value="Save"  styleClass="btn btn-primary btn-lg btn-block" id="geoPhotoSaveButton" onComplete="succesfullySave();" reRender="formId" onClick="showBlocker();" />                                     
+                                            <apex:commandButton value="Save" action="{!saveGeoLocationInfo}" styleClass="btn btn-primary btn-lg btn-block" id="geoPhotoSaveButton" onComplete="succesfullySave();" reRender="formId" />                                     
                                         </div> 
                                     </div>                                                                                                 
                                 </form>  

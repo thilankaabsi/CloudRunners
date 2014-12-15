@@ -17,6 +17,25 @@
 		        url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
 		    };			
 			
+			function createContent(id, name, description, attId) {
+    
+		      var link = '/apex/GF_PostDetail?id=' + id;    
+		      return '<div id="content">'+
+		          '<div id="siteNotice">'+
+		          '</div>'+
+		          '<h3 id="firstHeading" class="firstHeading">' + name + '</h3>'+
+		          '<div id="bodyContent">'+
+		          '<div style="float:left; width:15%;"><p style="margin:5px;">'+
+		          '<img src="/servlet/servlet.FileDownload?file=' + attId + '" width="100%" />'+
+		          '</p></div>'+
+		          '<div style="float:right; width:85%">'+
+		          '<p style="margin:5px; text-align:justify;">' + description + '</p>'+
+		          '</div>'+
+		          '<p><a href="' + link + '">More Info</a>'+            
+		          '</div>'+
+		          '</div>';        
+		    }
+			
 		    function addMarker(id, name, lat, lng, description, attId) {
 		        var marker = new google.maps.Marker({
 		                position: new google.maps.LatLng(lat, lng),
@@ -24,6 +43,15 @@
 		                icon: image,
 		                title: name
 		        }); 
+
+		        var overlayContent = createContent(id, name, description, attId); 
+		        var infowindow = new google.maps.InfoWindow({
+		            content: overlayContent            
+		        });  
+		                
+		        google.maps.event.addListener(marker, 'click', function() {
+		            infowindow.open(map,marker);
+		        });
 		    }			
 			
 		    function getLocations() {       

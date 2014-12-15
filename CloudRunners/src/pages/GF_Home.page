@@ -5,7 +5,20 @@
 * Created Date : 2014-12-15
 *******************************************/
 -->
-<apex:page showHeader="false">
+<apex:page showHeader="false" controller="GF_HomeController">
   
   <h1>GeoForce Home</h1>
+  
+  <br />
+  
+  <apex:repeat value="{!locationsDTO}" var="gl" id="geoLocations"> 
+  	 <br />
+  	
+  	<a href="/GF_PostDetail?{!gl.id}"><b>{!gl.name}</b></a> <br />
+  	
+  	{!gl.description} <br />
+  	
+  	<img src="/servlet/servlet.FileDownload?file={!gl.attId}" /> <br />
+  </apex:repeat>
+  
 </apex:page>
