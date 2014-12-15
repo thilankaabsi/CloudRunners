@@ -5,6 +5,14 @@
  -->
 <apex:page showHeader="false"  standardStylesheets="false" cache="false" doctype="html-5.0"  controller="GF_MapViewerController" >
 	<head>
+	    <style type="text/css">
+	        html { height: 100% }
+	        body { height: 100%; margin: 0; padding: 0 }
+	        #map-canvas { height: 100%; margin: 0; padding: 0; }
+	        .screenSize { height: 100%; margin: 0; padding: 0; }
+	        .baseSize { height: 90%; margin: 0; padding: 0; }
+	    </style>
+	
 		<!-- Google API -->
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfm-kQFwhgsiq9tqHRk9t56NuOiSmuhLQ" />
 		<c:GF_CommonImports ></c:GF_CommonImports>    
@@ -113,6 +121,18 @@
 		</script>
 	</head>
 	<body>
-		<div style="height: 500px; width: 800px;" id="map-canvas"></div>
+		<div class="baseSize panel panel-primary">
+            <c:GF_Header pgId="3" />            
+            <div class="screenSize panel-body">
+                <div class="screenSize bs-example">
+                    <div class="screenSize well">
+                        <p class="bg-info">                         
+                            <div id="map-canvas"></div>                         
+                        </p>                            
+                    </div>
+                </div>
+            </div>
+            <c:GF_Footer pgId="3" />                
+        </div> 
 	</body>
 </apex:page>

@@ -35,7 +35,7 @@ public with sharing class GF_Utils {
 	public static List<Geo_Location__c> getAllLocations( String userId ) {
 		return [SELECT id, name, Title__c, Description__c, Location__latitude__s, Location__longitude__s, 
         							(SELECT Id, Name FROM Attachments) FROM Geo_Location__c
-																		WHERE User__c=:userId];		
+																		WHERE User__c=:userId ORDER BY LastModifiedDate DESC];		
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public with sharing class GF_Utils {
 	*/
 	public static List<Geo_Location__c> getAllLocations() {
 		return [SELECT id, name, Title__c, Description__c, Location__latitude__s, Location__longitude__s, 
-        							(SELECT Id, Name FROM Attachments) FROM Geo_Location__c ];		
+        							(SELECT Id, Name FROM Attachments) FROM Geo_Location__c ORDER BY LastModifiedDate DESC];		
 	}
 	
 	/**
